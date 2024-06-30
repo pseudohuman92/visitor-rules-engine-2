@@ -1,0 +1,5 @@
+- When you want to implement an ability that says "When {~} enters play, ..." and doesn't target,
+    use 'addEnterPlayEffect' function from Card.java.
+
+-Card.java automatically registers triggering cards when they enter play and deregisters them when they leave.
+    Don't register them manually in their constructors.

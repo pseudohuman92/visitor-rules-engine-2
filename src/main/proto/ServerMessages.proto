@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "Types.proto";
+option java_package = "com.visitor.protocol";
+
+/**
+ * Messages from server to client.
+ */
+message LoginResponse {
+    string gameId = 1;
+    string playerId = 2;
+}
+    
+message NewGame {
+    GameType gameType = 1;
+    string aiId = 2;
+    GameStateP game = 3;
+}
+
+message NewDraft {
+    DraftState draft = 1;
+}
+
+message GetCollectionResponse{
+    repeated CardP cards = 1;
+}
+
+message ServerMessage {
+    oneof payload {
+        LoginResponse           loginResponse = 1;
+        NewGame                 newGame = 2;
+        NewDraft                newDraft = 3;
+        GetCollectionResponse   getCollectionResponse = 4;
+    }
+}

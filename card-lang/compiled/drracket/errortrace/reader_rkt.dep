@@ -1,0 +1,1 @@
+("7.9" racket ("456c9061bff79e2a05b5e92054b3becae45c6531" . "e64c0af871bb35ec497c27838af510efd9ee99e6") #"/home/pseudo/Dropbox (MIT)/Repos/Visitor/card-lang/parser.rkt" #"/home/pseudo/Dropbox (MIT)/Repos/Visitor/card-lang/tokenizer.rkt" (collects #"br" #"quicklang.rkt") (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"runtime-config.rkt"))
