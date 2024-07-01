@@ -47,7 +47,7 @@ public class Getters extends Base {
                 a.addAll(players.values());
                 return a;
             default:
-                return null;
+                return a;
         }
 
     }

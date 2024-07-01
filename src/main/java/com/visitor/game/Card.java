@@ -15,6 +15,7 @@ import com.visitor.protocol.Types.CounterGroup;
 import com.visitor.protocol.Types.Knowledge;
 import com.visitor.protocol.Types.KnowledgeGroup;
 
+import java.util.Collection;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -270,6 +271,10 @@ public abstract class Card implements Targetable {
 
     public void addCombatAbility(Combat.CombatAbility ability) {
         runIfNotNull(combat, () -> combat.addCombatAbility(ability));
+    }
+
+    public void addCombatAbility(Combat.CombatAbility ability, int count) {
+        runIfNotNull(combat, () -> combat.addCombatAbility(ability, count));
     }
 
     public void removeCombatAbility(Combat.CombatAbility ability) {
@@ -534,6 +539,26 @@ public abstract class Card implements Targetable {
         }
         return a;
     };
+
+    public int getShields() {
+        if (combat != null){
+            return combat.getShield();
+        } else {
+            return 0;
+        }
+    }
+
+    public void removeShields(int shieldAmount) {
+        runIfNotNull(combat, () -> combat.removeShield(shieldAmount));
+    }
+
+    public CounterMap<Combat.CombatAbility> getCombatAbilities() {
+        if (combat != null){
+            return combat.getCombatAbilities();
+        } else {
+            return new CounterMap<>();
+        }
+    }
 
     public enum CardType {
         Ally,

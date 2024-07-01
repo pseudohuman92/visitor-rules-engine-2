@@ -9,7 +9,6 @@ import com.visitor.card.types.Unit;
 import com.visitor.game.parts.Game;
 import com.visitor.helpers.CounterMap;
 import com.visitor.helpers.containers.ActivatedAbility;
-import com.visitor.sets.token.UnitToken;
 
 import java.util.UUID;
 
@@ -19,17 +18,17 @@ import static com.visitor.protocol.Types.Knowledge.YELLOW;
 /**
  * @author pseudo
  */
-public class Droneship extends Unit {
+public class Dropship extends Unit {
 
-    public Droneship(Game game, UUID owner) {
-        super(game, "Droneship",
+    public Dropship(Game game, UUID owner) {
+        super(game, "Dropship",
                 4, new CounterMap(YELLOW, 1),
-                "{Y}{Y}{Y} - {2}: Play a 1/1 Drone with flying.",
+                "{Y}{Y}{Y} - {2}: Create a Sentry.",
                 2, 4,
                 owner, Evasive);
-
-        activatable.addActivatedAbility(new ActivatedAbility(game, this, 2, "{Y}{Y}{Y} - {2}: Play a 1/1 Spirit with flying.",
-                () -> UnitToken.Drone_1_1(game, controller).resolve())
+        addShield(2, false);
+        activatable.addActivatedAbility(new ActivatedAbility(game, this, 2, "{Y}{Y}{Y} - {2}: Create a Sentry.",
+                () -> new Sentry(game, controller).resolve())
                 .setKnowledgeRequirement(new CounterMap<>(YELLOW, 3)));
     }
 }

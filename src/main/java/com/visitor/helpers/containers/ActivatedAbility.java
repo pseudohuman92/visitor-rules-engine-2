@@ -144,6 +144,18 @@ public class ActivatedAbility {
         return this;
     }
 
+    public ActivatedAbility addAbility(String text, Runnable effect, boolean forCost) {
+        TargetingEffect targeting = new TargetingEffect(game, card, None, 0, 0, Predicates::none, text, t->{
+            effect.run();
+        });
+        if (forCost){
+            costEffects.put(targeting.getId(), targeting);
+        } else {
+            effects.put(targeting.getId(), targeting);
+        }
+        return this;
+    }
+
     @SafeVarargs
     public final ActivatedAbility addCanActivateAdditional(Supplier<Boolean>... canActivateAdditionals) {
         canActivateAdditional.addAll(Arrays.asList(canActivateAdditionals));

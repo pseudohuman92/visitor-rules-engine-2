@@ -8,6 +8,7 @@ import com.visitor.helpers.CounterMap;
 import com.visitor.helpers.containers.Damage;
 import com.visitor.protocol.Types;
 
+import javax.validation.constraints.Max;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
@@ -421,6 +422,23 @@ public class Combat {
 
     public int getMaxHealth() {
         return maxHealth;
+    }
+
+    public void removeShield(int shieldAmount) {
+        if (turnlyShield >= shieldAmount){
+            turnlyShield -= shieldAmount;
+        } else {
+            shieldAmount -= turnlyShield;
+            turnlyShield = 0;
+            shield = Math.max(shield - shieldAmount, 0);
+        }
+    }
+
+    public CounterMap<CombatAbility> getCombatAbilities() {
+        CounterMap<CombatAbility> a = new CounterMap<>();
+        a.merge(turnlyCombatAbilityList);
+        a.merge(combatAbilityList);
+        return a;
     }
 
     public enum CombatAbility {

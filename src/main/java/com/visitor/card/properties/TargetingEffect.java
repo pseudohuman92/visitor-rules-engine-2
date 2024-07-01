@@ -8,6 +8,7 @@ import com.visitor.helpers.Arraylist;
 import com.visitor.helpers.Predicates;
 import com.visitor.protocol.Types;
 
+import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -36,7 +37,7 @@ public class TargetingEffect {
             Consumer<UUID> targetsEffect) {
         this.game = game;
         this.card = card;
-        this.zone = zone;
+        this.zone = Objects.requireNonNullElse(zone, Base.Zone.None);
         this.id = UUID.randomUUID();
         this.minTargets = minTargets;
         this.maxTargets = maxTargets;

@@ -15,18 +15,25 @@ public class Studiable {
     private final Card card;
     private final Game game;
 
+    private boolean purging;
+
     private Supplier<Boolean> studyCondition;
     private TriConsumer<Player, Boolean, CounterMap<Types.Knowledge>> studyEffect;
 
     private TriConsumer<Player, Boolean, CounterMap<Types.Knowledge>> additionalStudyEffect;
 
-    public Studiable(Game game, Card card, TriConsumer<Player, Boolean, CounterMap<Types.Knowledge>> additionalStudy) {
+    public Studiable(Game game, Card card, TriConsumer<Player, Boolean, CounterMap<Types.Knowledge>> additionalStudy, boolean purging) {
         this.card = card;
         this.game = game;
         this.additionalStudyEffect = additionalStudy;
+        this.purging = purging;
 
         setDefaultStudyCondition();
         setDefaultStudy();
+    }
+
+    public Studiable(Game game, Card card, TriConsumer<Player, Boolean, CounterMap<Types.Knowledge>> additionalStudy) {
+        this(game, card, additionalStudy, false);
     }
 
     public Studiable(Game game, Card card) {
@@ -62,7 +69,8 @@ public class Studiable {
     public void setDefaultStudy() {
         studyEffect = (player, regular, knowledge) -> {
             card.zone = null;
-            player.deck.shuffleInto(card);
+            if (!purging)
+                player.deck.shuffleInto(card);
             player.addEnergy(1, false);
             player.addMaxEnergy(1);
             player.addKnowledge(knowledge);

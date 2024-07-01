@@ -21,7 +21,7 @@ public abstract class Tome extends Card {
     public Tome(Game game, String name, String text, UUID owner) {
         super(game, name, new CounterMap<>(), CardType.Tome, text, owner);
 
-        studiable = new Studiable(game, this);
+        studiable = new Studiable(game, this, (a,b,c) ->{}, true);
     }
 
     public Tome(Game game, String name, String text, UUID owner, TriConsumer<Player, Boolean, CounterMap<Knowledge>> additionalStudy) {

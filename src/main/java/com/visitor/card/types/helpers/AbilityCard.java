@@ -26,7 +26,7 @@ public class AbilityCard extends Card {
     Arraylist<UUID> targets;
 
     public AbilityCard(Game game, Card creator, String text, Runnable effect) {
-        super(game, creator.name + "'s AbilityCard", new CounterMap<>(), CardType.Ability, text, creator.controller);
+        super(game, creator.name, new CounterMap<>(), CardType.Ability, text, creator.controller);
         playable = new Playable(game, this).addResolveEffect(effect).setDisappearing();
         targets = new Arraylist<>(creator.getId());
         targets.addAll(creator.getAllTargets());
@@ -35,9 +35,8 @@ public class AbilityCard extends Card {
 
     public AbilityCard(Game game, Card creator, ActivatedAbility activatedAbility) {
         this(game, creator, activatedAbility.getText(), activatedAbility::runEffects);
-        setId(activatedAbility.id);
+        //setId(activatedAbility.id);
     }
-
 
 
     @Override
